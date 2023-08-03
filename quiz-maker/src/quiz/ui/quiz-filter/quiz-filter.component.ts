@@ -23,7 +23,7 @@ export class QuizFilterComponent implements OnInit{
     @Output() public readonly newFilter = new EventEmitter<FilterValue>();
 
     public quizFilterForm = new FormGroup({
-        category: new FormControl<string | null>(null, Validators.required),
+        category: new FormControl<number | null>(null, Validators.required),
         difficulty: new FormControl<string | null>(null, Validators.required),
     });
 
@@ -52,10 +52,10 @@ export class QuizFilterComponent implements OnInit{
     }
 
     public onFormSubmit(): void {
-        const category = this._category?.value;
+        const categoryId = Number(this._category?.value);
         const difficulty = this._difficulty?.value;
 
-        this.newFilter.emit({ category, difficulty });
+        this.newFilter.emit({ categoryId, difficulty });
     }
 
     public trackByIndex(index: number): number {

@@ -1,4 +1,4 @@
 export interface FilterValue {
-    category: string;
+    categoryId: number;
     difficulty: string;
 }
