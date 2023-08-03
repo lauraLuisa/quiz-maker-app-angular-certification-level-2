@@ -1,0 +1,37 @@
+{
+    "root": true,
+    "overrides": [
+        {
+            "files": [
+                "*.ts",
+                "*.tsx",
+                "*.js",
+                "*.jsx"
+            ],
+            "extends": [
+                "@team23/eslint-config-team23-standard"
+            ],
+            "rules": {}
+        },
+        {
+            "files": [
+                "*.ts",
+                "*.tsx"
+            ],
+            "extends": [
+                "@team23/eslint-config-team23-ts",
+                "@team23/eslint-config-team23-angular"
+            ],
+            "rules": {}
+        },
+        {
+            "files": [
+                "*.html"
+            ],
+            "extends": [
+                "@team23/eslint-config-team23-angular"
+            ],
+            "rules": {}
+        }
+    ]
+}

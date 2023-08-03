@@ -1,0 +1,3 @@
+{
+    "extends": "./quiz-maker/tsconfig.app.json"
+}
