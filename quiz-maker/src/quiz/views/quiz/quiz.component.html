@@ -1,1 +1,7 @@
-<app-quiz-filter (newFilter)="createQuiz($event)"></app-quiz-filter>
+<app-quiz-filter (newFilter)="loadQuiz($event)"></app-quiz-filter>
+<ng-container *ngIf="questions$ | async as questions">
+    <ng-container *ngFor="let question of questions; trackBy: trackByIndex">
+        <div>{{question.question}}</div>
+    </ng-container>
+</ng-container>
+<ng-container *ngIf="isLoading">...loading</ng-container>
