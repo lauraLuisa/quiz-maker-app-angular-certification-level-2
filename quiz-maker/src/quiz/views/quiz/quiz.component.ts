@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QuizFilterComponent } from 'src/quiz/ui/quiz-filter/quiz-filter.component';
+import { FilterValue } from 'src/quiz/entitiy/types/filter-value';
 
 @Component({
     selector: 'app-quiz',
@@ -15,4 +16,7 @@ import { QuizFilterComponent } from 'src/quiz/ui/quiz-filter/quiz-filter.compone
 })
 export class QuizComponent {
 
+    public createQuiz(filterValue: FilterValue): void {
+        console.info(filterValue);
+    }
 }
