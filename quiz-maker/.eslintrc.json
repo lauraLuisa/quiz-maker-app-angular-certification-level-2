@@ -32,6 +32,14 @@
                 "@team23/eslint-config-team23-angular"
             ],
             "rules": {}
+        },
+        {
+            "files": [
+                "*routing.module.ts"
+            ],
+            "rules": {
+                "@typescript-eslint/promise-function-async": "off"
+            }
         }
     ]
 }
