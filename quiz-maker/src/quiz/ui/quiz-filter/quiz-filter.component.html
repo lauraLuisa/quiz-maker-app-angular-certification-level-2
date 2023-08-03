@@ -1,15 +1,17 @@
 <form [formGroup]="quizFilterForm" (submit)="onFormSubmit()">
     <select id="categorySelect" formControlName="category">
         <ng-container *ngIf="categories$ | async as categories">
+            <option [value]="null">Select category</option>
             <ng-container *ngFor="let category of categories; trackBy: trackByIndex">
-                <option [value]="category.name">{{ category.name }}</option>
+                <option [value]="category.id">{{ category.name }}</option>
             </ng-container>
         </ng-container>
     </select>
     <select id="difficultySelect" formControlName="difficulty">
+        <option [value]="null">Select difficulty</option>
         <ng-container *ngFor="let difficulty of difficulies; trackBy: trackByIndex">
-            <option [value]="difficulty">{{ difficulty }}</option>
+            <option [value]="difficulty.value">{{ difficulty.name }}</option>
         </ng-container>
     </select>
-    <button id="createBtn" type="submit">Create</button>
+    <button id="createBtn" type="submit" [disabled]="quizFilterForm.invalid">Create</button>
 </form>

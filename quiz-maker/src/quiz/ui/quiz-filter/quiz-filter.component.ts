@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Observable, tap } from 'rxjs';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { QuestionService } from 'src/quiz/data/question.service';
 import { TriviaCategory } from 'src/quiz/entitiy/types/trivia-category';
 import { Difficulty } from 'src/quiz/entitiy/enums/difficulty';
@@ -23,16 +23,16 @@ export class QuizFilterComponent implements OnInit{
     @Output() public readonly newFilter = new EventEmitter<FilterValue>();
 
     public quizFilterForm = new FormGroup({
-        category: new FormControl<string | null>(null),
-        difficulty: new FormControl<string | null>(null),
+        category: new FormControl<string | null>(null, Validators.required),
+        difficulty: new FormControl<string | null>(null, Validators.required),
     });
 
     public categories$?: Observable<Array<TriviaCategory>>;
 
-    public difficulies: Array<Difficulty> = [
-        Difficulty.Easy,
-        Difficulty.Medium,
-        Difficulty.Hard,
+    public difficulies: Array<{value: Difficulty; name: string}> = [
+        { value: Difficulty.Easy, name: 'Easy' },
+        { value: Difficulty.Medium, name: 'Medium' },
+        { value: Difficulty.Hard, name: 'Hard' },
     ];
 
     constructor(
@@ -48,21 +48,12 @@ export class QuizFilterComponent implements OnInit{
     }
 
     public ngOnInit(): void {
-        this.categories$ = this._questionService.getAllQuestionCategories()
-            .pipe(
-                tap(categories => this._category?.setValue(categories[0].name)),
-            );
-
-        this._difficulty?.setValue(this.difficulies[0]);
+        this.categories$ = this._questionService.getAllQuestionCategories();
     }
 
     public onFormSubmit(): void {
         const category = this._category?.value;
         const difficulty = this._difficulty?.value;
-
-        if(!category || !difficulty) {
-            return;
-        }
 
         this.newFilter.emit({ category, difficulty });
     }
