@@ -1,8 +1,8 @@
 <h1>Quiz Results</h1>
-<ng-container *ngIf="questions$ | async as questions">
+<div *ngIf="questions$ | async as questions" class="questions">
     <ng-container *ngFor="let question of questions; trackBy: trackByIndex">
         <app-question [question]="question" [isDisabled]="true"></app-question>
     </ng-container>
     <app-quiz-score [questions]="questions"></app-quiz-score>
-</ng-container>
+</div>
 <button (click)="restartQuiz()" class="full-width primary">Create a new Quiz</button>
