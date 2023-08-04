@@ -10,6 +10,7 @@ import { selectLoadingStatus, selectQuestions } from 'src/quiz/store/questions.s
 import { LoadingStatus } from 'src/shared/types/loading-status';
 import { FilterValue } from 'src/quiz/entitiy/types/filter-value';
 import { loadQuestions, updateQuestion } from 'src/quiz/store/questions.action';
+import { LoadingStatusComponent } from 'src/shared/ui/loading-status/loading-status.component';
 
 @Component({
     selector: 'app-quiz',
@@ -18,6 +19,7 @@ import { loadQuestions, updateQuestion } from 'src/quiz/store/questions.action';
         CommonModule,
         QuizFilterComponent,
         QuestionComponent,
+        LoadingStatusComponent,
     ],
     templateUrl: './quiz.component.html',
     styleUrls: ['./quiz.component.scss'],

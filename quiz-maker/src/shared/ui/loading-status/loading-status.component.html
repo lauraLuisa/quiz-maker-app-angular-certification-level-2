@@ -1,0 +1,6 @@
+<ng-container *ngIf="loadingStatus$ | async as loadingStatus">
+    <div [ngSwitch]="loadingStatus">
+       <div *ngSwitchCase="'loading'">...loading</div>
+       <div *ngSwitchCase="'error'">Sorry, something went wrong when loading the quiz.</div>
+    </div>
+</ng-container>
