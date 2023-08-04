@@ -1,12 +1,15 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QuizFilterComponent } from 'src/quiz/ui/quiz-filter/quiz-filter.component';
-import { FilterValue } from 'src/quiz/entitiy/types/filter-value';
 import { QuestionService } from 'src/quiz/data/question.service';
-import { Observable, tap } from 'rxjs';
-import { TriviaQuestion } from 'src/quiz/entitiy/types/trivia-question';
+import { Observable, of } from 'rxjs';
+import { MultipleChoiceQuestion } from 'src/quiz/entitiy/types/trivia-question';
 import { QuestionComponent } from 'src/quiz/ui/question/question.component';
-import { Answer } from 'src/quiz/entitiy/types/answer';
+import { Store } from '@ngrx/store';
+import { selectLoadingStatus, selectQuestions } from 'src/quiz/store/questions.selectors';
+import { LoadingStatus } from 'src/shared/types/loading-status';
+import { FilterValue } from 'src/quiz/entitiy/types/filter-value';
+import { loadQuestions, updateQuestion } from 'src/quiz/store/questions.action';
 
 @Component({
     selector: 'app-quiz',
@@ -22,28 +25,26 @@ import { Answer } from 'src/quiz/entitiy/types/answer';
 })
 export class QuizComponent {
 
-    public questions$?: Observable<Array<TriviaQuestion>>;
-    public isLoading = false;
-    public answers: Array<Answer> = [];
+    public questions$?: Observable<Array<MultipleChoiceQuestion> | undefined>;
+    public loadingStatus$: Observable<LoadingStatus> = of('pending');
 
     constructor(
         protected readonly _questionService: QuestionService,
-    ) { }
-
-    public loadQuiz(filterValue: FilterValue): void {
-        this.isLoading = true;
-        this.questions$ = this._questionService.getQuestions(filterValue.categoryId, filterValue.difficulty)
-            .pipe(
-                tap(() => this.isLoading = false),
-            );
+        protected readonly _store$: Store,
+    ) {
+        this.questions$ = this._store$.select(selectQuestions);
+        this.loadingStatus$ = this._store$.select(selectLoadingStatus);
     }
 
-    public addAnswer(answer: Answer): void {
-        const index = this.answers.findIndex(answerEl => answer.question === answerEl.question);
+    public loadQuiz(filterValue: FilterValue): void {
+        this._store$.dispatch(loadQuestions({
+            categoryId: filterValue.categoryId,
+            difficulty: filterValue.difficulty,
+        }));
+    }
 
-        index === -1 ?
-            this.answers.push(answer) :
-            this.answers[index] = answer;
+    public updateQuestion(question: MultipleChoiceQuestion): void {
+        this._store$.dispatch(updateQuestion({ question }));
     }
 
     public trackByIndex(index: number): number {

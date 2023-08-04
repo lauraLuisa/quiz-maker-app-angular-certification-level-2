@@ -1,8 +1,12 @@
 <app-quiz-filter (newFilter)="loadQuiz($event)"></app-quiz-filter>
 <ng-container *ngIf="questions$ | async as questions">
     <ng-container *ngFor="let question of questions; trackBy: trackByIndex">
-        <app-question [question]="question" (newAnswer)="addAnswer($event)"></app-question>
+        <app-question [question]="question" (newAnswer)="updateQuestion($event)"></app-question>
     </ng-container>
-    <button *ngIf="questions.length === answers.length">Submit</button>
 </ng-container>
-<ng-container *ngIf="isLoading">...loading</ng-container>
+<ng-container *ngIf="loadingStatus$ | async as loadingStatus">
+ <div [ngSwitch]="loadingStatus">
+    <div *ngSwitchCase="'loading'">...loading</div>
+    <div *ngSwitchCase="'error'">Sorry, something went wrong when loading the quiz.</div>
+ </div>
+</ng-container>
