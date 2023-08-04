@@ -1,15 +1,17 @@
-<div *ngIf="question" class="question">
-    <p>{{ question.question }}</p>
-    <ng-container *ngFor="let option of question.options; trackBy: trackByIndex">
-        <button
-            (click)="onOptionClick(option)"
-            class="question__option"
-            [ngClass]="{
-                'question__option--selected': question.selectedAnswer === option && !isDisabled,
-                'question__option--wrong': question.selectedAnswer === option && question.selectedAnswer !== question.correct_answer && isDisabled,
-                'question__option--correct': question.correct_answer === option && isDisabled,
-                'question__option--disabled': isDisabled
-            }"
-        >{{ option }}</button>
-    </ng-container>
+<div *ngIf="question">
+    <p [innerHTML]="question.question"></p>
+    <div class="options">
+        <ng-container *ngFor="let option of question.options; trackBy: trackByIndex">
+            <button
+                (click)="onOptionClick(option)"
+                [ngClass]="{
+                    'primary': question.selectedAnswer === option && !isDisabled,
+                    'error': (question.selectedAnswer === option) && (question.selectedAnswer !== question.correct_answer) && isDisabled,
+                    'success': question.correct_answer === option && isDisabled,
+                    'disabled': isDisabled
+                }"
+                [innerHTML]="option"
+            ></button>
+        </ng-container>
+    </div>
 </div>

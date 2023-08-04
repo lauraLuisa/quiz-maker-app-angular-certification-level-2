@@ -1,8 +1,14 @@
 <app-quiz-filter (newFilter)="loadQuiz($event)"></app-quiz-filter>
-<ng-container *ngIf="questions$ | async as questions">
-    <ng-container *ngFor="let question of questions; trackBy: trackByIndex">
-        <app-question [question]="question" (newAnswer)="updateQuestion($event)"></app-question>
+<div class="questions">
+    <ng-container *ngIf="questions$ | async as questions">
+        <ng-container *ngFor="let question of questions; trackBy: trackByIndex">
+            <app-question [question]="question" (newAnswer)="updateQuestion($event)"></app-question>
+        </ng-container>
     </ng-container>
-</ng-container>
-<app-loading-status [loadingStatus$]="loadingStatus$"></app-loading-status>
-<button *ngIf="isSubmissionPossible" [routerLink]="['/results']">Submit</button>
+    <app-loading-status [loadingStatus$]="loadingStatus$"></app-loading-status>
+</div>
+<button
+    *ngIf="isSubmissionPossible"
+    [routerLink]="['/results']"
+    class="full-width primary"
+>Submit</button>

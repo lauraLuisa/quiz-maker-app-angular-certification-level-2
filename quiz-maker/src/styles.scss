@@ -1,1 +1,88 @@
 /* You can add global styles to this file, and also import other style files */
+
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    padding: 50px;
+    max-width: 750px;
+    margin: auto;
+}
+
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('assets/chevron.png');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 15px 15px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    min-width: 200px;
+}
+
+option {
+    padding: 5px;
+}
+
+button {
+    appearance: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid #1e1e1e;
+    background-color: #fff;
+    color: #1e1e1e;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+
+    &:hover {
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    &:active,
+    &:focus {
+        outline: none;
+    }
+
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    &.disabled {
+        pointer-events: none;
+    }
+
+    &.full-width {
+        width: 100%;
+    }
+}
+
+.success {
+    background-color: green;
+    color: #fff;
+}
+
+.warning {
+    background-color: yellow;
+    color: #1e1e1e;
+}
+
+.error {
+    background-color: red;
+    color: #fff;
+}
+
+.primary {
+    background-color: #1e1e1e;
+    color: #fff;
+}

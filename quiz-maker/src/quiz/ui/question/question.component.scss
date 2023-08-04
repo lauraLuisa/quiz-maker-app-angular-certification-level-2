@@ -1,19 +1,5 @@
-.question {
-    &__option {
-        cursor: pointer;
-
-        &--selected {
-            background-color: gray;
-        }
-        &--correct {
-            background-color: green;
-        }
-        &--wrong {
-            background-color: red;
-        }
-        &--disabled {
-            pointer-events: none;
-            cursor: default;
-        }
-    }
+.options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
 }

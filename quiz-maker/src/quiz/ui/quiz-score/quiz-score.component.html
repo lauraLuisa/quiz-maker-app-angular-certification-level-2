@@ -1,5 +1,3 @@
-<div [ngStyle]="{
-    'background-color': correctAnswerCount >= 4 ? 'green' : correctAnswerCount >= 2 ? 'yellow' : 'red'
-  }">
-    <p>You scroed {{ correctAnswerCount }} out of {{ questions.length }}</p>
+<div [ngClass]="correctAnswerCount >= 4 ? 'success' : correctAnswerCount >= 2 ? 'warning' : 'error'" class="score">
+    <p>You scored {{ correctAnswerCount }} out of {{ questions.length }}</p>
 </div>
