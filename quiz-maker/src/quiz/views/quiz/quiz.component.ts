@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QuizFilterComponent } from 'src/quiz/ui/quiz-filter/quiz-filter.component';
 import { QuestionService } from 'src/quiz/data/question.service';
-import { Observable, of } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 import { MultipleChoiceQuestion } from 'src/quiz/entitiy/types/trivia-question';
 import { QuestionComponent } from 'src/quiz/ui/question/question.component';
 import { Store } from '@ngrx/store';
@@ -30,11 +30,22 @@ export class QuizComponent {
     public questions$?: Observable<Array<MultipleChoiceQuestion> | undefined>;
     public loadingStatus$: Observable<LoadingStatus> = of('pending');
 
+    public isSubmissionPossible = false;
+
     constructor(
         protected readonly _questionService: QuestionService,
         protected readonly _store$: Store,
     ) {
-        this.questions$ = this._store$.select(selectQuestions);
+        this.questions$ = this._store$.select(selectQuestions)
+            .pipe(
+                tap(questions => {
+                    if (!questions) {
+                        return;
+                    }
+
+                    this.isSubmissionPossible = this._isQuizFullyAnswered(questions);
+                }),
+            );
         this.loadingStatus$ = this._store$.select(selectLoadingStatus);
     }
 
@@ -51,5 +62,11 @@ export class QuizComponent {
 
     public trackByIndex(index: number): number {
         return index;
+    }
+
+    protected _isQuizFullyAnswered(questions: Array<MultipleChoiceQuestion>): boolean {
+        const index = questions.findIndex(question => question.selectedAnswer === null);
+
+        return index === -1;
     }
 }
