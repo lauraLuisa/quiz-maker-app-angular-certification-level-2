@@ -1,0 +1,5 @@
+<div [ngStyle]="{
+    'background-color': correctAnswerCount >= 4 ? 'green' : correctAnswerCount >= 2 ? 'yellow' : 'red'
+  }">
+    <p>You scroed {{ correctAnswerCount }} out of {{ questions.length }}</p>
+</div>

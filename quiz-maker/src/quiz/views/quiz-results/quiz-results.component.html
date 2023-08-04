@@ -2,5 +2,6 @@
     <ng-container *ngFor="let question of questions; trackBy: trackByIndex">
         <app-question [question]="question" [isDisabled]="true"></app-question>
     </ng-container>
+    <app-quiz-score [questions]="questions"></app-quiz-score>
 </ng-container>
 <button (click)="restartQuiz()">Create a new Quiz</button>

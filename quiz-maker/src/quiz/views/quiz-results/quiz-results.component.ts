@@ -7,6 +7,7 @@ import { selectQuestions } from 'src/quiz/store/questions.selectors';
 import { QuestionComponent } from 'src/quiz/ui/question/question.component';
 import { Router } from '@angular/router';
 import { resetQuestions } from 'src/quiz/store/questions.action';
+import { QuizScoreComponent } from 'src/quiz/ui/quiz-score/quiz-score.component';
 
 @Component({
     selector: 'app-quiz-results',
@@ -14,6 +15,7 @@ import { resetQuestions } from 'src/quiz/store/questions.action';
     imports: [
         CommonModule,
         QuestionComponent,
+        QuizScoreComponent,
     ],
     templateUrl: './quiz-results.component.html',
     styleUrls: ['./quiz-results.component.scss'],
