@@ -1,0 +1,7 @@
+.question {
+    &__option {
+        &--selected {
+            background-color: gray;
+        }
+    }
+}

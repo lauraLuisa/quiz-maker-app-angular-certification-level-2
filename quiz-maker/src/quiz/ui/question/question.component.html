@@ -1,0 +1,10 @@
+<div *ngIf="question" class="question">
+    <p>{{ question.question }}</p>
+    <ng-container *ngFor="let option of options; trackBy: trackByIndex">
+        <button
+            (click)="onOptionClick(option)"
+            class="question__option"
+            [class.question__option--selected]="selectedAnswer?.answer === option"
+        >{{ option }}</button>
+    </ng-container>
+</div>
