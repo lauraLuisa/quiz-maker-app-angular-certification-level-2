@@ -4,7 +4,12 @@
         <button
             (click)="onOptionClick(option)"
             class="question__option"
-            [class.question__option--selected]="question.selectedAnswer === option"
+            [ngClass]="{
+                'question__option--selected': question.selectedAnswer === option && !isDisabled,
+                'question__option--wrong': question.selectedAnswer === option && question.selectedAnswer !== question.correct_answer && isDisabled,
+                'question__option--correct': question.correct_answer === option && isDisabled,
+                'question__option--disabled': isDisabled
+            }"
         >{{ option }}</button>
     </ng-container>
 </div>

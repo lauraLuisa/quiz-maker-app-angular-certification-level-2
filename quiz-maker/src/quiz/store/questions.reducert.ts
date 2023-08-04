@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { MultipleChoiceQuestion } from '../entitiy/types/trivia-question';
-import { loadQuestions, loadQuestionsFailure, loadQuestionsSuccess, updateQuestion } from './questions.action';
+import { loadQuestions, loadQuestionsFailure, loadQuestionsSuccess, resetQuestions, updateQuestion } from './questions.action';
 import { LoadingStatus } from 'src/shared/types/loading-status';
 
 export interface QuestionState {
@@ -43,6 +43,13 @@ export const questionsReducer = createReducer(
         (state, { question }): QuestionState => ({
             ...state,
             questions: updateQuestions(state.questions, question),
+        }),
+    ),
+    on(
+        resetQuestions,
+        (state): QuestionState => ({
+            ...state,
+            questions: undefined,
         }),
     ),
 );

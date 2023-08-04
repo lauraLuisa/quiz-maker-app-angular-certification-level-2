@@ -7,6 +7,11 @@ const routes: Routes = [
         loadComponent: () => import('../quiz/views/quiz/quiz.component')
             .then(mod => mod.QuizComponent),
     },
+    {
+        path: 'results',
+        loadComponent: () => import('../quiz/views/quiz-results/quiz-results.component')
+            .then(mod => mod.QuizResultsComponent),
+    },
     { path: '**', redirectTo: '/quiz' },
 ];
 

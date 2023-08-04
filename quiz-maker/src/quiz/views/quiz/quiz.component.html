@@ -5,4 +5,4 @@
     </ng-container>
 </ng-container>
 <app-loading-status [loadingStatus$]="loadingStatus$"></app-loading-status>
-<button *ngIf="isSubmissionPossible">Submit</button>
+<button *ngIf="isSubmissionPossible" [routerLink]="['/results']">Submit</button>

@@ -13,6 +13,8 @@ import { MultipleChoiceQuestion } from 'src/quiz/entitiy/types/trivia-question';
 export class QuestionComponent {
 
     @Input() public question?: MultipleChoiceQuestion;
+    @Input() public isDisabled?: boolean;
+
     @Output() public readonly newAnswer = new EventEmitter<MultipleChoiceQuestion>();
 
     public onOptionClick(option: string): void {

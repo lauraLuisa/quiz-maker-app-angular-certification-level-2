@@ -1,7 +1,19 @@
 .question {
     &__option {
+        cursor: pointer;
+
         &--selected {
             background-color: gray;
+        }
+        &--correct {
+            background-color: green;
+        }
+        &--wrong {
+            background-color: red;
+        }
+        &--disabled {
+            pointer-events: none;
+            cursor: default;
         }
     }
 }

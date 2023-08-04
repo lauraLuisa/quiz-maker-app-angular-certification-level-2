@@ -19,3 +19,7 @@ export const updateQuestion = createAction(
     '[Questions] Update question',
     props<{question: MultipleChoiceQuestion}>(),
 );
+
+export const resetQuestions = createAction(
+    '[Questions] Reset Questions',
+);

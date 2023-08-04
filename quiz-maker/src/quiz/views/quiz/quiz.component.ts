@@ -11,6 +11,7 @@ import { LoadingStatus } from 'src/shared/types/loading-status';
 import { FilterValue } from 'src/quiz/entitiy/types/filter-value';
 import { loadQuestions, updateQuestion } from 'src/quiz/store/questions.action';
 import { LoadingStatusComponent } from 'src/shared/ui/loading-status/loading-status.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
     selector: 'app-quiz',
@@ -20,6 +21,7 @@ import { LoadingStatusComponent } from 'src/shared/ui/loading-status/loading-sta
         QuizFilterComponent,
         QuestionComponent,
         LoadingStatusComponent,
+        RouterModule,
     ],
     templateUrl: './quiz.component.html',
     styleUrls: ['./quiz.component.scss'],
